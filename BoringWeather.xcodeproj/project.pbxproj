@@ -1,0 +1,803 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* BoringWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* BoringWeatherApp.swift */; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* ContentView.swift */; };
+		A10003 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* DIContainer.swift */; };
+		A10004 /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* WeatherModels.swift */; };
+		A10005 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* APIResponseModels.swift */; };
+		A10006 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* APIConfig.swift */; };
+		A10007 /* WeatherAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* WeatherAPIService.swift */; };
+		A10008 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* CacheService.swift */; };
+		A10009 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* LocationService.swift */; };
+		A10010 /* UnitsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* UnitsService.swift */; };
+		A10011 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* WeatherRepository.swift */; };
+		A10012 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* HomeViewModel.swift */; };
+		A10013 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* LocationsViewModel.swift */; };
+		A10014 /* AlertsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014 /* AlertsViewModel.swift */; };
+		A10015 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015 /* SettingsViewModel.swift */; };
+		A10016 /* RetroTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* RetroTheme.swift */; };
+		A10017 /* WeatherIconMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* WeatherIconMapper.swift */; };
+		A10018 /* RetroComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* RetroComponents.swift */; };
+		A10019 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* HomeView.swift */; };
+		A10020 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020 /* LocationsView.swift */; };
+		A10021 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* AlertsView.swift */; };
+		A10022 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* SettingsView.swift */; };
+		A10023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10023 /* Assets.xcassets */; };
+		A10030 /* BoringWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030 /* BoringWeatherTests.swift */; };
+		A10040 /* BoringWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* BoringWeatherUITests.swift */; };
+		A10050 /* CloudBackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10050 /* CloudBackupService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D10001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E10001;
+			remoteInfo = BoringWeather;
+		};
+		C10002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D10001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E10001;
+			remoteInfo = BoringWeather;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B10001 /* BoringWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringWeatherApp.swift; sourceTree = "<group>"; };
+		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10003 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		B10004 /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
+		B10005 /* APIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModels.swift; sourceTree = "<group>"; };
+		B10006 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		B10007 /* WeatherAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIService.swift; sourceTree = "<group>"; };
+		B10008 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		B10009 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		B10010 /* UnitsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsService.swift; sourceTree = "<group>"; };
+		B10011 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
+		B10012 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B10013 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
+		B10014 /* AlertsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewModel.swift; sourceTree = "<group>"; };
+		B10015 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B10016 /* RetroTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroTheme.swift; sourceTree = "<group>"; };
+		B10017 /* WeatherIconMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconMapper.swift; sourceTree = "<group>"; };
+		B10018 /* RetroComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroComponents.swift; sourceTree = "<group>"; };
+		B10019 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B10020 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
+		B10021 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+		B10022 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B10023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10025 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10030 /* BoringWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringWeatherTests.swift; sourceTree = "<group>"; };
+		B10040 /* BoringWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringWeatherUITests.swift; sourceTree = "<group>"; };
+		B10050 /* CloudBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudBackupService.swift; sourceTree = "<group>"; };
+		B10051 /* BoringWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoringWeather.entitlements; sourceTree = "<group>"; };
+		F10001 /* BoringWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoringWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10002 /* BoringWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoringWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10003 /* BoringWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoringWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF0002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF0003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10001 = {
+			isa = PBXGroup;
+			children = (
+				G10002 /* BoringWeather */,
+				G10020 /* BoringWeatherTests */,
+				G10021 /* BoringWeatherUITests */,
+				G10099 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10002 /* BoringWeather */ = {
+			isa = PBXGroup;
+			children = (
+				G10003 /* App */,
+				G10004 /* Models */,
+				G10005 /* Config */,
+				G10006 /* Services */,
+				G10010 /* Repository */,
+				G10011 /* ViewModels */,
+				G10012 /* Views */,
+				G10019 /* Resources */,
+				B10051 /* BoringWeather.entitlements */,
+				B10025 /* Info.plist */,
+			);
+			path = BoringWeather;
+			sourceTree = "<group>";
+		};
+		G10003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* BoringWeatherApp.swift */,
+				B10002 /* ContentView.swift */,
+				B10003 /* DIContainer.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		G10004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10004 /* WeatherModels.swift */,
+				B10005 /* APIResponseModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G10005 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				B10006 /* APIConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		G10006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				G10007 /* API */,
+				G10008 /* Cache */,
+				G10009A /* Location */,
+				G10009B /* Units */,
+				B10050 /* CloudBackupService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G10007 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B10007 /* WeatherAPIService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		G10008 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B10008 /* CacheService.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		G10009A /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				B10009 /* LocationService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		G10009B /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				B10010 /* UnitsService.swift */,
+			);
+			path = Units;
+			sourceTree = "<group>";
+		};
+		G10010 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B10011 /* WeatherRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		G10011 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B10012 /* HomeViewModel.swift */,
+				B10013 /* LocationsViewModel.swift */,
+				B10014 /* AlertsViewModel.swift */,
+				B10015 /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		G10012 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				G10013 /* Theme */,
+				G10014 /* Components */,
+				G10015 /* Home */,
+				G10016 /* Locations */,
+				G10017 /* Alerts */,
+				G10018 /* Settings */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G10013 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B10016 /* RetroTheme.swift */,
+				B10017 /* WeatherIconMapper.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		G10014 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B10018 /* RetroComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		G10015 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B10019 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		G10016 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				B10020 /* LocationsView.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		G10017 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				B10021 /* AlertsView.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		G10018 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B10022 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		G10019 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10023 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		G10020 /* BoringWeatherTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10030 /* BoringWeatherTests.swift */,
+			);
+			path = BoringWeatherTests;
+			sourceTree = "<group>";
+		};
+		G10021 /* BoringWeatherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B10040 /* BoringWeatherUITests.swift */,
+			);
+			path = BoringWeatherUITests;
+			sourceTree = "<group>";
+		};
+		G10099 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F10001 /* BoringWeather.app */,
+				F10002 /* BoringWeatherTests.xctest */,
+				F10003 /* BoringWeatherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10001 /* BoringWeather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = X10001 /* Build configuration list for PBXNativeTarget "BoringWeather" */;
+			buildPhases = (
+				S10001 /* Sources */,
+				FF0001 /* Frameworks */,
+				R10001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BoringWeather;
+			productName = BoringWeather;
+			productReference = F10001 /* BoringWeather.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E10002 /* BoringWeatherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = X10002 /* Build configuration list for PBXNativeTarget "BoringWeatherTests" */;
+			buildPhases = (
+				S10002 /* Sources */,
+				FF0002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE0001 /* PBXTargetDependency */,
+			);
+			name = BoringWeatherTests;
+			productName = BoringWeatherTests;
+			productReference = F10002 /* BoringWeatherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E10003 /* BoringWeatherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = X10003 /* Build configuration list for PBXNativeTarget "BoringWeatherUITests" */;
+			buildPhases = (
+				S10003 /* Sources */,
+				FF0003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE0002 /* PBXTargetDependency */,
+			);
+			name = BoringWeatherUITests;
+			productName = BoringWeatherUITests;
+			productReference = F10003 /* BoringWeatherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					E10001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					E10002 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = E10001;
+					};
+					E10003 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = E10001;
+					};
+				};
+			};
+			buildConfigurationList = X10000 /* Build configuration list for PBXProject "BoringWeather" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G10001;
+			productRefGroup = G10099 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10001 /* BoringWeather */,
+				E10002 /* BoringWeatherTests */,
+				E10003 /* BoringWeatherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R10001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10023 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* BoringWeatherApp.swift in Sources */,
+				A10002 /* ContentView.swift in Sources */,
+				A10003 /* DIContainer.swift in Sources */,
+				A10004 /* WeatherModels.swift in Sources */,
+				A10005 /* APIResponseModels.swift in Sources */,
+				A10006 /* APIConfig.swift in Sources */,
+				A10007 /* WeatherAPIService.swift in Sources */,
+				A10008 /* CacheService.swift in Sources */,
+				A10009 /* LocationService.swift in Sources */,
+				A10010 /* UnitsService.swift in Sources */,
+				A10011 /* WeatherRepository.swift in Sources */,
+				A10012 /* HomeViewModel.swift in Sources */,
+				A10013 /* LocationsViewModel.swift in Sources */,
+				A10014 /* AlertsViewModel.swift in Sources */,
+				A10015 /* SettingsViewModel.swift in Sources */,
+				A10016 /* RetroTheme.swift in Sources */,
+				A10017 /* WeatherIconMapper.swift in Sources */,
+				A10018 /* RetroComponents.swift in Sources */,
+				A10019 /* HomeView.swift in Sources */,
+				A10020 /* LocationsView.swift in Sources */,
+				A10021 /* AlertsView.swift in Sources */,
+				A10022 /* SettingsView.swift in Sources */,
+				A10050 /* CloudBackupService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10030 /* BoringWeatherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10040 /* BoringWeatherUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE0001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E10001 /* BoringWeather */;
+			targetProxy = C10001 /* PBXContainerItemProxy */;
+		};
+		DE0002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E10001 /* BoringWeather */;
+			targetProxy = C10002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BC0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BC0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BC0003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = BoringWeather/BoringWeather.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 635YFJCZY3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BoringWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BoringWeather;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "BoringWeather needs your location to show local weather conditions.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = BoringWeather/BoringWeather.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 635YFJCZY3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BoringWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BoringWeather;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "BoringWeather needs your location to show local weather conditions.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC0005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoringWeather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoringWeather";
+			};
+			name = Debug;
+		};
+		BC0006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoringWeather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoringWeather";
+			};
+			name = Release;
+		};
+		BC0007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BoringWeather;
+			};
+			name = Debug;
+		};
+		BC0008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boringweather.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BoringWeather;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		X10000 /* Build configuration list for PBXProject "BoringWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC0001 /* Debug */,
+				BC0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		X10001 /* Build configuration list for PBXNativeTarget "BoringWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC0003 /* Debug */,
+				BC0004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		X10002 /* Build configuration list for PBXNativeTarget "BoringWeatherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC0005 /* Debug */,
+				BC0006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		X10003 /* Build configuration list for PBXNativeTarget "BoringWeatherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC0007 /* Debug */,
+				BC0008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D10001 /* Project object */;
+}
