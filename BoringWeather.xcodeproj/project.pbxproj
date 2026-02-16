@@ -80,7 +80,6 @@
 		B10030 /* BoringWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringWeatherTests.swift; sourceTree = "<group>"; };
 		B10040 /* BoringWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringWeatherUITests.swift; sourceTree = "<group>"; };
 		B10050 /* CloudBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudBackupService.swift; sourceTree = "<group>"; };
-		B10051 /* BoringWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoringWeather.entitlements; sourceTree = "<group>"; };
 		F10001 /* BoringWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoringWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10002 /* BoringWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoringWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10003 /* BoringWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoringWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,7 +131,6 @@
 				G10011 /* ViewModels */,
 				G10012 /* Views */,
 				G10019 /* Resources */,
-				B10051 /* BoringWeather.entitlements */,
 				B10025 /* Info.plist */,
 			);
 			path = BoringWeather;
