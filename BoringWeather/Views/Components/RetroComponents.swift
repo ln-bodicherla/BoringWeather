@@ -4,21 +4,29 @@ import SwiftUI
 
 struct RetroSectionHeader: View {
     let title: String
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        HStack {
-            Text("[ \(title) ]")
-                .font(RetroTheme.headlineFont)
-                .foregroundStyle(textColor)
+        HStack(spacing: 10) {
+            Text(title)
+                .font(RetroTheme.mono(12, weight: .bold))
+                .foregroundStyle(RetroTheme.textSecondary)
                 .textCase(.uppercase)
+                .tracking(3)
+
+            // Animated gradient line
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [RetroTheme.accentColor.opacity(0.5), RetroTheme.accentPurple.opacity(0.2), Color.clear],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(height: 0.5)
+
             Spacer()
         }
         .padding(.horizontal, 4)
-    }
-
-    private var textColor: Color {
-        colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.8)
     }
 }
 
@@ -28,7 +36,6 @@ struct RetroDetailRow: View {
     let label: String
     let value: String
     let icon: String
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         HStack(spacing: 10) {
@@ -38,126 +45,165 @@ struct RetroDetailRow: View {
                 .frame(width: 20)
             Text(label)
                 .font(RetroTheme.bodyFont)
-                .foregroundStyle(colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.5))
+                .foregroundStyle(RetroTheme.textSecondary)
             Spacer()
             Text(value)
                 .font(RetroTheme.bodyFont)
-                .foregroundStyle(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.8))
+                .foregroundStyle(RetroTheme.textPrimary)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(label): \(value)")
     }
 }
 
-// MARK: - Retro Loading Screen
+// MARK: - Liquid Loading Screen
 
 struct RetroSkeletonView: View {
-    @State private var visibleLines = 0
-    @State private var cursorVisible = true
-    @Environment(\.colorScheme) var colorScheme
-
-    private let lines = [
-        "> BORINGWEATHER v1.0",
-        "> Initializing weather module...",
-        "> Requesting GPS coordinates...",
-        "> Connecting to Open-Meteo...",
-        "> Fetching forecast data...",
-        "> Parsing atmospheric readings...",
-        "> Loading hourly forecast...",
-        "> Rendering display...",
-        ""
-    ]
+    @State private var blobPhase: Double = 0
+    @State private var ringScale: [CGFloat] = [0.5, 0.5, 0.5]
+    @State private var ringOpacity: [Double] = [0, 0, 0]
+    @State private var textOpacity: Double = 0
+    @State private var dotCount = 0
+    @State private var progressWidth: CGFloat = 0
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Spacer()
-                .frame(height: 40)
+        ZStack {
+            // Floating particles behind everything
+            FloatingParticles(count: 15, color: RetroTheme.accentColor.opacity(0.5))
+                .allowsHitTesting(false)
 
-            ForEach(0..<min(visibleLines, lines.count), id: \.self) { index in
-                Text(lines[index])
-                    .font(RetroTheme.mono(13))
-                    .foregroundStyle(lineColor(for: index))
-            }
+            VStack(spacing: 32) {
+                Spacer()
 
-            // Blinking cursor
-            if visibleLines < lines.count {
-                HStack(spacing: 0) {
-                    Text("> ")
-                        .font(RetroTheme.mono(13))
-                        .foregroundStyle(RetroTheme.accentColor)
-                    Rectangle()
-                        .fill(RetroTheme.accentColor)
-                        .frame(width: 8, height: 14)
-                        .opacity(cursorVisible ? 1 : 0)
+                // Central liquid blob with rings
+                ZStack {
+                    // Expanding rings
+                    ForEach(0..<3, id: \.self) { i in
+                        Circle()
+                            .stroke(
+                                RetroTheme.accentColor.opacity(0.3),
+                                lineWidth: 0.8
+                            )
+                            .frame(width: CGFloat(80 + i * 40), height: CGFloat(80 + i * 40))
+                            .scaleEffect(ringScale[i])
+                            .opacity(ringOpacity[i])
+                    }
+
+                    // Liquid blob
+                    LiquidBlob(phase: blobPhase)
+                        .fill(
+                            RadialGradient(
+                                colors: [
+                                    RetroTheme.accentColor.opacity(0.6),
+                                    RetroTheme.accentPurple.opacity(0.3),
+                                    Color.clear
+                                ],
+                                center: .center,
+                                startRadius: 5,
+                                endRadius: 50
+                            )
+                        )
+                        .frame(width: 100, height: 100)
+                        .blur(radius: 8)
+
+                    // Inner glow
+                    LiquidBlob(phase: blobPhase + 1.5)
+                        .fill(RetroTheme.accentColor.opacity(0.4))
+                        .frame(width: 40, height: 40)
+                        .blur(radius: 4)
+
+                    // Center bright dot
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 6, height: 6)
+                        .liquidGlow(color: RetroTheme.accentColor)
                 }
-            }
+                .frame(height: 200)
 
-            Spacer()
+                // Status text
+                VStack(spacing: 10) {
+                    Text("SYNCING")
+                        .font(RetroTheme.mono(16, weight: .bold))
+                        .foregroundStyle(RetroTheme.textPrimary)
+                        .tracking(6)
+                        .opacity(textOpacity)
 
-            // Progress bar
-            HStack(spacing: 4) {
-                Text("[")
-                    .font(RetroTheme.mono(12))
-                    .foregroundStyle(dimColor)
+                    HStack(spacing: 2) {
+                        Text("Fetching atmospheric data")
+                            .font(RetroTheme.mono(12))
+                            .foregroundStyle(RetroTheme.textTertiary)
+                        ForEach(0..<3, id: \.self) { i in
+                            Text(".")
+                                .font(RetroTheme.mono(12))
+                                .foregroundStyle(RetroTheme.textTertiary)
+                                .opacity(dotCount > i ? 1 : 0)
+                        }
+                    }
+                    .opacity(textOpacity)
+                }
 
+                // Glass progress bar
                 GeometryReader { geo in
-                    let progress = min(CGFloat(visibleLines) / CGFloat(lines.count), 1.0)
-                    let filledWidth = geo.size.width * progress
-
                     ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(dimColor.opacity(0.2))
-                        Rectangle()
-                            .fill(RetroTheme.accentColor.opacity(0.6))
-                            .frame(width: filledWidth)
+                        Capsule()
+                            .fill(.ultraThinMaterial)
+                            .frame(height: 4)
+
+                        Capsule()
+                            .fill(
+                                LinearGradient(
+                                    colors: [RetroTheme.accentColor, RetroTheme.accentPurple],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(width: progressWidth * geo.size.width, height: 4)
+                            .liquidGlow(color: RetroTheme.accentColor)
                     }
                 }
-                .frame(height: 8)
-                .clipShape(Rectangle())
+                .frame(height: 4)
+                .padding(.horizontal, 50)
 
-                Text("]")
-                    .font(RetroTheme.mono(12))
-                    .foregroundStyle(dimColor)
-
-                Text("\(min(visibleLines * 100 / max(lines.count, 1), 100))%")
-                    .font(RetroTheme.mono(11))
-                    .foregroundStyle(dimColor)
-                    .frame(width: 36, alignment: .trailing)
+                Spacer()
+                Spacer()
             }
-            .padding(.bottom, 20)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 20)
         .onAppear {
-            startTyping()
-            startCursorBlink()
-        }
-    }
+            // Blob animation
+            withAnimation(.linear(duration: 6).repeatForever(autoreverses: false)) {
+                blobPhase = .pi * 2
+            }
 
-    private func lineColor(for index: Int) -> Color {
-        if index == 0 {
-            return RetroTheme.accentColor
-        }
-        return colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.5)
-    }
+            // Ring pulses
+            for i in 0..<3 {
+                withAnimation(
+                    .easeOut(duration: 2)
+                    .repeatForever(autoreverses: false)
+                    .delay(Double(i) * 0.6)
+                ) {
+                    ringScale[i] = 1.5
+                    ringOpacity[i] = 0
+                }
+                // Set initial visible state
+                ringOpacity[i] = 0.5
+            }
 
-    private var dimColor: Color {
-        colorScheme == .dark ? .white.opacity(0.3) : .black.opacity(0.25)
-    }
+            // Text fade in
+            withAnimation(.easeOut(duration: 0.8).delay(0.3)) {
+                textOpacity = 1
+            }
 
-    private func startTyping() {
-        for i in 1...lines.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.4) {
-                withAnimation(.none) {
-                    visibleLines = i
+            // Loading dots
+            Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    dotCount = (dotCount + 1) % 4
                 }
             }
-        }
-    }
 
-    private func startCursorBlink() {
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-            cursorVisible.toggle()
+            // Progress bar
+            withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
+                progressWidth = 0.85
+            }
         }
     }
 }
@@ -167,35 +213,71 @@ struct RetroSkeletonView: View {
 struct RetroErrorView: View {
     let message: String
     let retryAction: () async -> Void
-    @Environment(\.colorScheme) var colorScheme
+    @State private var pulse = false
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("--- ERROR ---")
-                .font(RetroTheme.headlineFont)
-                .foregroundStyle(colorScheme == .dark ? .white : .black)
+        VStack(spacing: 28) {
+            ZStack {
+                // Pulsing background
+                Circle()
+                    .fill(RetroTheme.accentPink.opacity(0.08))
+                    .frame(width: 100, height: 100)
+                    .scaleEffect(pulse ? 1.2 : 0.9)
+
+                Circle()
+                    .fill(RetroTheme.accentPink.opacity(0.05))
+                    .frame(width: 70, height: 70)
+
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 32))
+                    .foregroundStyle(RetroTheme.accentPink)
+                    .liquidGlow(color: RetroTheme.accentPink)
+            }
+
+            Text("Connection Lost")
+                .font(RetroTheme.mono(20, weight: .bold))
+                .foregroundStyle(RetroTheme.textPrimary)
+                .tracking(1)
 
             Text(message)
-                .font(RetroTheme.bodyFont)
-                .foregroundStyle(colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.6))
+                .font(RetroTheme.mono(13))
+                .foregroundStyle(RetroTheme.textSecondary)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
+                .padding(.horizontal, 32)
 
             Button {
                 Task { await retryAction() }
             } label: {
-                Text("[ RETRY ]")
-                    .font(RetroTheme.bodyFont)
-                    .foregroundStyle(RetroTheme.accentColor)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(RetroTheme.accentColor, lineWidth: 1)
-                    )
+                HStack(spacing: 8) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 13, weight: .bold))
+                    Text("Try Again")
+                        .font(RetroTheme.mono(14, weight: .bold))
+                }
+                .foregroundStyle(.white)
+                .padding(.horizontal, 36)
+                .padding(.vertical, 14)
+                .background(
+                    Capsule()
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            Capsule()
+                                .fill(RetroTheme.accentGradient.opacity(0.5))
+                        )
+                )
+                .overlay(
+                    Capsule()
+                        .stroke(RetroTheme.accentColor.opacity(0.3), lineWidth: 0.5)
+                )
+                .liquidGlow(color: RetroTheme.accentColor)
             }
         }
         .padding()
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
+                pulse = true
+            }
+        }
     }
 }
 
@@ -203,29 +285,39 @@ struct RetroErrorView: View {
 
 struct RetroOfflineBanner: View {
     let lastUpdated: String
-    @Environment(\.colorScheme) var colorScheme
+    @State private var blink = false
 
     var body: some View {
         HStack(spacing: 8) {
+            Circle()
+                .fill(RetroTheme.accentPink)
+                .frame(width: 5, height: 5)
+                .opacity(blink ? 1 : 0.3)
+
             Image(systemName: "wifi.slash")
-                .font(.system(size: 12))
-            Text("OFFLINE")
-                .font(RetroTheme.captionFont)
-            Text("•")
+                .font(.system(size: 10))
+            Text("Offline")
+                .font(RetroTheme.mono(11, weight: .medium))
+            Text("·")
             Text(lastUpdated)
-                .font(RetroTheme.captionFont)
+                .font(RetroTheme.mono(10))
         }
-        .foregroundStyle(RetroTheme.accentColor)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .foregroundStyle(RetroTheme.textSecondary)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
         .background(
-            RoundedRectangle(cornerRadius: 4)
-                .fill(RetroTheme.accentColor.opacity(0.1))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(RetroTheme.accentColor.opacity(0.3), lineWidth: 1)
-                )
+            Capsule()
+                .fill(.ultraThinMaterial)
         )
+        .overlay(
+            Capsule()
+                .stroke(RetroTheme.accentPink.opacity(0.25), lineWidth: 0.5)
+        )
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                blink = true
+            }
+        }
     }
 }
 
@@ -235,7 +327,6 @@ struct RetroNavBar<Leading: View, Trailing: View>: View {
     let title: String
     let leading: Leading
     let trailing: Trailing
-    @Environment(\.colorScheme) var colorScheme
 
     init(
         title: String,
@@ -256,21 +347,38 @@ struct RetroNavBar<Leading: View, Trailing: View>: View {
                 Spacer()
 
                 Text(title)
-                    .font(RetroTheme.mono(16, weight: .bold))
-                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+                    .font(RetroTheme.mono(17, weight: .bold))
+                    .foregroundStyle(RetroTheme.textPrimary)
+                    .tracking(2)
 
                 Spacer()
 
                 trailing
                     .frame(width: 44, alignment: .trailing)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .background(colorScheme == .dark ? RetroTheme.bgDark : RetroTheme.bgLight)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(
+                ZStack {
+                    RetroTheme.bgDark.opacity(0.7)
+                        .background(.ultraThinMaterial.opacity(0.5))
+                }
+            )
 
             Rectangle()
-                .fill(colorScheme == .dark ? RetroTheme.borderDark : RetroTheme.borderLight)
-                .frame(height: 1)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color.clear,
+                            RetroTheme.accentColor.opacity(0.2),
+                            RetroTheme.accentPurple.opacity(0.15),
+                            Color.clear
+                        ],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(height: 0.5)
         }
     }
 }
@@ -278,11 +386,15 @@ struct RetroNavBar<Leading: View, Trailing: View>: View {
 // MARK: - Divider
 
 struct RetroDivider: View {
-    @Environment(\.colorScheme) var colorScheme
-
     var body: some View {
         Rectangle()
-            .fill(colorScheme == .dark ? RetroTheme.borderDark : RetroTheme.borderLight)
-            .frame(height: 1)
+            .fill(
+                LinearGradient(
+                    colors: [Color.clear, Color.white.opacity(0.08), Color.clear],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .frame(height: 0.5)
     }
 }

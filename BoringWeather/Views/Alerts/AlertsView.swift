@@ -22,7 +22,18 @@ struct AlertsView: View {
                 .padding()
             }
         }
-        .background(colorScheme == .dark ? RetroTheme.bgDark : RetroTheme.bgLight)
+        .background(
+            ZStack {
+                RetroTheme.bgDark
+                LiquidBlob(phase: 2)
+                    .fill(RetroTheme.accentMint.opacity(0.04))
+                    .frame(width: 300, height: 300)
+                    .blur(radius: 80)
+                    .offset(y: -100)
+                    .allowsHitTesting(false)
+            }
+            .ignoresSafeArea()
+        )
         .onChange(of: container.homeViewModel.weatherData?.id) { _, _ in
             viewModel.loadAlerts(from: container.homeViewModel.weatherData)
         }
@@ -34,19 +45,40 @@ struct AlertsView: View {
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "checkmark.shield.fill")
-                .font(.system(size: 40))
-                .foregroundStyle(RetroTheme.accentColor.opacity(0.5))
+        VStack(spacing: 24) {
+            ZStack {
+                // Animated rings
+                BreathingRing(color: RetroTheme.accentMint.opacity(0.2), size: 100)
+                BreathingRing(color: RetroTheme.accentMint.opacity(0.15), size: 70)
 
-            Text("NO ACTIVE ALERTS")
-                .font(RetroTheme.headlineFont)
-                .foregroundStyle(colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.6))
+                // Glass circle
+                ZStack {
+                    Circle()
+                        .fill(.ultraThinMaterial)
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(RetroTheme.accentMint.opacity(0.2), lineWidth: 0.5)
+                        )
 
-            Text("Open-Meteo does not provide weather alerts.\nCheck your local weather service for warnings.")
-                .font(RetroTheme.bodyFont)
-                .foregroundStyle(colorScheme == .dark ? .white.opacity(0.4) : .black.opacity(0.3))
+                    Image(systemName: "checkmark.shield.fill")
+                        .font(.system(size: 28))
+                        .foregroundStyle(RetroTheme.accentMint)
+                        .liquidGlow(color: RetroTheme.accentMint)
+                }
+            }
+            .frame(height: 110)
+
+            Text("All Clear")
+                .font(RetroTheme.mono(20, weight: .bold))
+                .foregroundStyle(RetroTheme.textPrimary)
+                .tracking(2)
+
+            Text("No active weather alerts.\nCheck your local weather service\nfor warnings.")
+                .font(RetroTheme.mono(12))
+                .foregroundStyle(RetroTheme.textTertiary)
                 .multilineTextAlignment(.center)
+                .lineSpacing(3)
         }
         .padding(.top, 80)
     }
@@ -54,57 +86,80 @@ struct AlertsView: View {
     // MARK: - Alert Card
 
     private func alertCard(_ alert: WeatherAlert) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 8) {
-                Image(systemName: viewModel.severityIcon(alert.severity))
-                    .foregroundStyle(viewModel.severityColor(alert.severity))
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(alert.event.isEmpty ? alert.headline : alert.event)
-                        .font(RetroTheme.mono(13, weight: .bold))
-                        .foregroundStyle(colorScheme == .dark ? .white : .black)
-                        .textCase(.uppercase)
-
-                    Text("Severity: \(alert.severity)")
-                        .font(RetroTheme.captionFont)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                // Severity icon with glass circle
+                ZStack {
+                    Circle()
+                        .fill(viewModel.severityColor(alert.severity).opacity(0.12))
+                        .frame(width: 36, height: 36)
+                        .overlay(
+                            Circle()
+                                .stroke(viewModel.severityColor(alert.severity).opacity(0.2), lineWidth: 0.5)
+                        )
+                    Image(systemName: viewModel.severityIcon(alert.severity))
+                        .font(.system(size: 15))
                         .foregroundStyle(viewModel.severityColor(alert.severity))
-                        .textCase(.uppercase)
                 }
 
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(alert.event.isEmpty ? alert.headline : alert.event)
+                        .font(RetroTheme.mono(14, weight: .bold))
+                        .foregroundStyle(RetroTheme.textPrimary)
+                    Text(alert.severity.uppercased())
+                        .font(RetroTheme.mono(10, weight: .bold))
+                        .foregroundStyle(viewModel.severityColor(alert.severity))
+                        .tracking(2)
+                }
                 Spacer()
             }
 
             RetroDivider()
 
             if !alert.effective.isEmpty {
-                HStack {
-                    Text("From:")
-                        .font(RetroTheme.captionFont)
-                        .foregroundStyle(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.4))
+                HStack(spacing: 6) {
+                    Text("From")
+                        .font(RetroTheme.mono(10, weight: .bold))
+                        .foregroundStyle(RetroTheme.textTertiary)
                     Text(alert.effective)
-                        .font(RetroTheme.captionFont)
-                        .foregroundStyle(colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.6))
+                        .font(RetroTheme.mono(11))
+                        .foregroundStyle(RetroTheme.textSecondary)
                 }
             }
             if !alert.expires.isEmpty {
-                HStack {
-                    Text("Until:")
-                        .font(RetroTheme.captionFont)
-                        .foregroundStyle(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.4))
+                HStack(spacing: 6) {
+                    Text("Until")
+                        .font(RetroTheme.mono(10, weight: .bold))
+                        .foregroundStyle(RetroTheme.textTertiary)
                     Text(alert.expires)
-                        .font(RetroTheme.captionFont)
-                        .foregroundStyle(colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.6))
+                        .font(RetroTheme.mono(11))
+                        .foregroundStyle(RetroTheme.textSecondary)
                 }
             }
 
             if !alert.description.isEmpty {
                 RetroDivider()
                 Text(alert.description)
-                    .font(RetroTheme.captionFont)
-                    .foregroundStyle(colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.5))
+                    .font(RetroTheme.mono(11))
+                    .foregroundStyle(RetroTheme.textTertiary)
+                    .lineSpacing(3)
                     .lineLimit(6)
             }
         }
         .retroCard()
+        .overlay(
+            RoundedRectangle(cornerRadius: RetroTheme.cardCornerRadius)
+                .stroke(
+                    LinearGradient(
+                        colors: [
+                            viewModel.severityColor(alert.severity).opacity(0.3),
+                            viewModel.severityColor(alert.severity).opacity(0.05)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 0.5
+                )
+        )
     }
 }
